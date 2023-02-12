@@ -37,6 +37,7 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
         }
         holder.textname.setText(list.getName());
         holder.textmsg.setText(list.getLastmessage());
+        holder.unmsgno.setText(String.valueOf(list.getUnseenmsg()));
         if(list.getLastmessage().equals("")){
             holder.textmsg.setVisibility(View.GONE);
         }
@@ -49,7 +50,6 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
         else{
             holder.unmsgno.setVisibility(View.VISIBLE);
         }
-
         holder.ll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
