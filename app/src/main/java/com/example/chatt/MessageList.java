@@ -1,15 +1,24 @@
 package com.example.chatt;
 
 public class MessageList {
-    String name,mobile,lastmessage,profilepic;
+    String name,mobile,lastmessage,profilepic,chatkey;
     int unseenmsg;
 
-    public MessageList(String name, String mobile, String lastmessage,String profilepic, int unseenmsg) {
+    public MessageList(String name, String mobile, String lastmessage,String profilepic, int unseenmsg,String chatkey) {
         this.name = name;
         this.mobile = mobile;
         this.lastmessage = lastmessage;
         this.profilepic=profilepic;
         this.unseenmsg = unseenmsg;
+        this.chatkey=chatkey;
+    }
+
+    public String getChatkey() {
+        return chatkey;
+    }
+
+    public void setChatkey(String chatkey) {
+        this.chatkey = chatkey;
     }
 
     public String getName() { return name; }
@@ -42,9 +51,7 @@ public class MessageList {
         this.unseenmsg = unseenmsg;
     }
 
-    public String getProfilepic() {
-        return profilepic;
-    }
+    public String getProfilepic() { return profilepic; }
 
     public void setProfilepic(String profilepic) {
         this.profilepic = profilepic;

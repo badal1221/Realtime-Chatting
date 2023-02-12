@@ -1,20 +1,18 @@
 package com.example.chatt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatt.chat.Chat;
 import com.squareup.picasso.Picasso;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontactadapter.viewholder> {
@@ -32,28 +30,59 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
         return holder;
     }
     @Override
-    public void onBindViewHolder(viewholder holder, int position) {
-        //holder.imageView.setImageResource(arr.get(position).);
+    public void onBindViewHolder(viewholder holder,int position) {
+        MessageList list=arr.get(position);
         if(!arr.get(position).profilepic.isEmpty()) {
-            Picasso.get().load(arr.get(position).profilepic).into(holder.imageview);
+            Picasso.get().load(list.profilepic).into(holder.imageview);
         }
-        holder.textname.setText(arr.get(position).getName());
-        holder.textmsg.setText(arr.get(position).getLastmessage());
-        holder.unmsgno.setText(arr.get(position).getUnseenmsg());
+        holder.textname.setText(list.getName());
+        holder.textmsg.setText(list.getLastmessage());
+        if(list.getLastmessage().equals("")){
+            holder.textmsg.setVisibility(View.GONE);
+        }
+        else{
+            holder.textmsg.setVisibility(View.VISIBLE);
+        }
+        holder.unmsgno.setText(String.valueOf(list.getUnseenmsg()));
+        if(list.getUnseenmsg()==0){
+            holder.unmsgno.setVisibility(View.GONE); }
+        else{
+            holder.unmsgno.setVisibility(View.VISIBLE);
+        }
+
+        holder.ll1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, Chat.class);
+                intent.putExtra("Name",list.getName());
+                intent.putExtra("profile_pic",list.getProfilepic());
+                intent.putExtra("chat_key",list.getChatkey());
+                intent.putExtra("Mobile",list.getMobile());
+                context.startActivity(intent);
+            }
+        });
     }
+    public void updateData(ArrayList<MessageList> arr){
+            this.arr=arr;
+            notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return arr.size();
     }
+
     public class viewholder extends RecyclerView.ViewHolder{
         CircleImageView imageview;
         TextView textname,textmsg,unmsgno;
+        LinearLayout ll1;
         public viewholder(@NotNull View itemView) {
             super(itemView);
             imageview=itemView.findViewById(R.id.img1);
             textname=itemView.findViewById(R.id.name);
             textmsg=itemView.findViewById(R.id.unmsg);
             unmsgno=itemView.findViewById(R.id.unmsgno);
+            ll1=itemView.findViewById(R.id.ll1);
         }
     }
 }

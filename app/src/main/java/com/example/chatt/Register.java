@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
             Intent intent=new Intent(Register.this,MainActivity.class);
             intent.putExtra("Name",MemoryData.getName(this));
             intent.putExtra("Mobno",MemoryData.getData(this));
-            intent.putExtra("Email","");
+            intent.putExtra("Email"," ");
             startActivity(intent);
             finish();
         }
@@ -55,7 +55,7 @@ public class Register extends AppCompatActivity {
                             else{
                                 databaseReference.child("users").child(mobno).child("name").setValue(name);
                                 databaseReference.child("users").child(mobno).child("email").setValue(email);
-                                databaseReference.child("users").child(mobno).child("profile_pic").setValue("");
+                                databaseReference.child("users").child(mobno).child("profile_pic").setValue(" ");
                                 MemoryData.saveData(mobno,Register.this);
                                 MemoryData.saveName(name,Register.this);
                                 Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
