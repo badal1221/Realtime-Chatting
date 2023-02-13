@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recview;
     CircleImageView img1;
     int unseen=0;
-    String last_msg="";
+    private String last_msg="";
     private String chatkey="";
     private boolean dataset=false;
     private  Recyclercontactadapter adapter;

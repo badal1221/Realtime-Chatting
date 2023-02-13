@@ -71,6 +71,8 @@ public class Chat extends AppCompatActivity {
             public void onClick(View view) {
                 String textmsg=txt.getText().toString();
                 final String currenttimestamp=String.valueOf(System.currentTimeMillis()).substring(0,10);
+                //here the last seen message time is the time for last sent message
+                //update soon
                 MemoryData.savelastmsgTs(currenttimestamp,chatkey,Chat.this);
                 databaseReference.child("chat").child(chatkey).child("user_1").setValue(user1mob);
                 databaseReference.child("chat").child(chatkey).child("user_2").setValue(user2mob);

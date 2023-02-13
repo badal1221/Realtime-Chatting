@@ -32,9 +32,13 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
     @Override
     public void onBindViewHolder(viewholder holder,int position) {
         MessageList list=arr.get(position);
-        if(!arr.get(position).profilepic.isEmpty()) {
-            Picasso.get().load(list.profilepic).into(holder.imageview);
-        }
+
+        //update image settings
+//        if(!arr.get(position).profilepic.equals("")) {
+//            Picasso.get().load(list.profilepic).into(holder.imageview);
+//        }
+//        else{ holder.imageview.setImageResource(R.drawable.tst); }
+        holder.imageview.setImageResource(R.drawable.tst);
         holder.textname.setText(list.getName());
         holder.textmsg.setText(list.getLastmessage());
         holder.unmsgno.setText(String.valueOf(list.getUnseenmsg()));
