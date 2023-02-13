@@ -45,6 +45,9 @@ public class Register extends AppCompatActivity {
                 if(name.isEmpty()||mobno.isEmpty()||email.isEmpty()){
                     Toast.makeText(Register.this, "All fields are required", Toast.LENGTH_SHORT).show();
                 }
+                else if(!isNumeric(mobno)){
+                    Toast.makeText(Register.this,"Enter a valid mobile number",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -76,5 +79,16 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
+    }
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

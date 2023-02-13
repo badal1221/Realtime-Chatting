@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,18 +31,20 @@ public class MainActivity extends AppCompatActivity {
     private String chatkey="";
     private boolean dataset=false;
     private  Recyclercontactadapter adapter;
+    ProgressBar prgbr;
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://chatapplication-73bf2-default-rtdb.firebaseio.com/");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         recview=findViewById(R.id.recview);
         img1=findViewById(R.id.img1);
-
+        prgbr=findViewById(R.id.prgbr);
         recview.setLayoutManager(new LinearLayoutManager(this));
         adapter=new Recyclercontactadapter(MainActivity.this,arr);
         recview.setAdapter(adapter);
-
+        prgbr.setVisibility(View.VISIBLE);
         name=getIntent().getStringExtra("Name");
         email=getIntent().getStringExtra("Email");
         mobno=getIntent().getStringExtra("Mobno");
@@ -108,6 +113,6 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
             }
         });
-
+        prgbr.setVisibility(View.GONE);
     }
 }

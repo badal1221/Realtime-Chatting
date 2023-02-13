@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rl1">
 
         <ImageView
             android:id="@+id/backbtn"
@@ -57,6 +58,15 @@
                 android:text="Online"/>
         </LinearLayout>
     </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl1"
+        android:layout_above="@id/rl2"
+        android:id="@+id/chatrecview"/>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +74,7 @@
         android:backgroundTint="#B4E7ED"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:id="@+id/rl2"
         >
         <EditText
             android:layout_width="290dp"

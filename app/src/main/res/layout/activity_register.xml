@@ -43,17 +43,18 @@
         android:layout_below="@id/mobtxt"
         android:layout_centerHorizontal="true"
         android:hint="email id"/>
+
     <Button
+        android:id="@+id/submit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/submit"
         android:layout_below="@id/emailtxt"
-        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
         android:text="SUBMIT"
         android:textSize="25dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:background="@drawable/custom_btn_bg" />
+        android:textStyle="bold" />
 
 </RelativeLayout>
