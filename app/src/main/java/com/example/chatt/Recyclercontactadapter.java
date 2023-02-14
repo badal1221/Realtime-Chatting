@@ -2,6 +2,7 @@ package com.example.chatt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
                 intent.putExtra("profile_pic",list.getProfilepic());
                 intent.putExtra("chat_key",list.getChatkey());
                 intent.putExtra("Mobile",list.getMobile());
+  //              Log.d("arr",String.valueOf(list.getChatkey().isEmpty()));
                 context.startActivity(intent);
             }
         });

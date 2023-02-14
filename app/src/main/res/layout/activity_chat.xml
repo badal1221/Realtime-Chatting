@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.Chat">
+    tools:context=".chat.Chat"
+    android:background="@drawable/bg3">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="User Name"
+                android:textColor="#020202"
                 />
 
             <TextView
@@ -55,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textSize="10dp"
-                android:text="Online"/>
+                android:text="Online"
+                android:textColor="#020202"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -92,7 +95,7 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/send2"
+            android:src="@drawable/send4"
             android:id="@+id/send"
             android:layout_centerVertical="true"/>
 

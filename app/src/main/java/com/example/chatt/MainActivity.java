@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
                   else{ img1.setImageResource(R.drawable.tst); }
             }
             @Override
-            public void onCancelled(DatabaseError error) {
-            }
+            public void onCancelled(DatabaseError error) { }
         });
         //recview set
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -74,19 +73,18 @@ public class MainActivity extends AppCompatActivity {
                          databaseReference.child("chat").addListenerForSingleValueEvent(new ValueEventListener() {
                              @Override
                              public void onDataChange(DataSnapshot snapshot1) {
-                                 int getchatcount=(int)snapshot1.getChildrenCount();
                                  for(DataSnapshot ds:snapshot1.getChildren()){
-                                     final String getkey=ds.getKey();
-                                     chatkey=getkey;
                                      if(ds.hasChild("user_1") && ds.hasChild("user_2")){
                                          final String getuserone=ds.child("user_1").getValue(String.class);
                                          final String getusertwo=ds.child("user_2").getValue(String.class);
                                          if((getuserone.equals(getmobile) && getusertwo.equals(mobno)) ||(getusertwo.equals(getmobile) && getuserone.equals(mobno))){
+                                             //final String getkey=ds.getKey();
+                                             chatkey=ds.getKey();
                                              for(DataSnapshot dataSnapshot1:ds.child("messages").getChildren()){
                                                  //msg key of msg we are now iterating
                                                  final long msgkey=Long.parseLong(dataSnapshot1.getKey());
                                                  //getting the key of last seen message from memory
-                                                 final long lastseenmsg=Long.parseLong(MemoryData.getlastmsgTs(MainActivity.this,getkey));
+                                                 final long lastseenmsg=Long.parseLong(MemoryData.getlastmsgTs(MainActivity.this,chatkey));
                                                  last_msg=dataSnapshot1.child("msg").getValue(String.class);
                                                  if(msgkey > lastseenmsg){
                                                      unseen++;
@@ -100,8 +98,10 @@ public class MainActivity extends AppCompatActivity {
                              public void onCancelled(DatabaseError error) {
                              }
                          });
+                         Log.d("arr",String.valueOf(chatkey.isEmpty()));
                          if(!dataset){
                              dataset=true;
+ //                            Log.d("arr",String.valueOf(chatkey.isEmpty()));
                              MessageList mesglist=new MessageList(getname,getmobile,last_msg,getprofile_pic,unseen,chatkey);
                              arr.add(mesglist);
                              adapter.updateData(arr);

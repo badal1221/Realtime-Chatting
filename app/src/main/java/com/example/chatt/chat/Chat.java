@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,7 +53,7 @@ public class Chat extends AppCompatActivity {
         final String user1mob = MemoryData.getData(Chat.this);
         final String name1 = getIntent().getStringExtra("Name");
         final String prp = getIntent().getStringExtra("profile_pic");
-        chatkey = getIntent().getStringExtra("chat_key");
+       chatkey = getIntent().getStringExtra("chat_key");
         final String user2mob = getIntent().getStringExtra("Mobile");
         name.setText(name1);
         if (!prp.equals(" ")) {
@@ -66,12 +67,11 @@ public class Chat extends AppCompatActivity {
         chatrecview.setAdapter(adapter);
         //if no chatkey generated =>no chat between these 2 user=>we need to give them a chat key and define their user1 and 2
         //for user 1 and 2 we need their mobile numbers
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (chatkey.isEmpty()) {
-                    chatkey = "1";
+                    chatkey="1";
                     if (snapshot.hasChild("chat")) {
                         chatkey = String.valueOf(snapshot.child("chat").getChildrenCount() + 1);
                     }
@@ -111,7 +111,7 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String textmsg = txt.getText().toString();
-                final String currenttimestamp = String.valueOf(System.currentTimeMillis()).substring(0, 10);
+                final String currenttimestamp = String.valueOf(System.currentTimeMillis());
                 //here the last seen message time is the time for last sent message
                 //update soon
                 databaseReference.child("chat").child(chatkey).child("user_1").setValue(user1mob);
