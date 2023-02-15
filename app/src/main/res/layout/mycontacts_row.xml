@@ -6,17 +6,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="14dp"
+        app:cardCornerRadius="12dp"
         android:id="@+id/cv"
         android:paddingStart="2dp"
         android:paddingEnd="2dp"
         app:cardBackgroundColor="@color/white"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:outlineAmbientShadowColor="@color/cardview_dark_background">
         <LinearLayout
             android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#8D40EC"
+            android:background="#0A332F"
             android:orientation="horizontal"
             >
 
@@ -31,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="15dp"
                 android:orientation="vertical">
 
@@ -39,7 +41,8 @@
                     android:id="@+id/name"
                     android:layout_width="250dp"
                     android:layout_height="25dp"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/unmsg"

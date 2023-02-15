@@ -56,11 +56,8 @@ public class Chat extends AppCompatActivity {
        chatkey = getIntent().getStringExtra("chat_key");
         final String user2mob = getIntent().getStringExtra("Mobile");
         name.setText(name1);
-        if (!prp.equals(" ")) {
-            Picasso.get().load(prp).into(pp);
-        } else {
-            pp.setImageResource(R.drawable.tst);
-        }
+        if (!prp.equals(" ")) { Picasso.get().load(prp).into(pp); }
+        else { pp.setImageResource(R.drawable.tst); }
         chatrecview.setHasFixedSize(true);
         chatrecview.setLayoutManager(new LinearLayoutManager(Chat.this));
         adapter=new ChatAdapter(Chat.this,arr);

@@ -7,8 +7,7 @@
                 android:topLeftRadius="34dp"
                 android:topRightRadius="34dp">
             </corners>
-            <solid android:color="#078D9A" />
+            <solid android:color="#FF104B45" />
         </shape>
     </item>
-
 </selector>

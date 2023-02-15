@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rl1">
+        android:id="@+id/rl1"
+        android:background="#FF104B45">
 
         <ImageView
             android:id="@+id/backbtn"
@@ -18,7 +19,6 @@
             android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
             android:paddingStart="12dp"
             android:paddingEnd="2dp"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
@@ -28,8 +28,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/backbtn" />
 
         <LinearLayout
@@ -37,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_toEndOf="@+id/pp"
             android:orientation="vertical">
 
@@ -55,7 +54,7 @@
                 android:id="@+id/status"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:textSize="10dp"
                 android:text="Online"
                 android:textColor="#020202"/>
@@ -63,11 +62,12 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatrecview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rl1"
         android:layout_above="@id/rl2"
-        android:id="@+id/chatrecview"/>
+        android:layout_below="@+id/rl1"
+        android:layout_marginTop="15dp" />
 
 
     <RelativeLayout
@@ -89,7 +89,8 @@
             android:hint="Type here"
             android:textSize="14dp"
             android:id="@+id/txt"
-            android:background="@drawable/custom_btn_bg"/>
+            android:background="@drawable/custom_edittext"
+            />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"

@@ -95,8 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                  }
                              }
                              @Override
-                             public void onCancelled(DatabaseError error) {
-                             }
+                             public void onCancelled(DatabaseError error) { }
                          });
                          Log.d("arr",String.valueOf(chatkey.isEmpty()));
                          if(!dataset){
