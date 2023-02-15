@@ -76,21 +76,20 @@
         android:layout_alignParentBottom="true"
         android:backgroundTint="#B4E7ED"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:id="@+id/rl2"
         >
+
         <EditText
+            android:id="@+id/txt"
             android:layout_width="290dp"
             android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:paddingStart="15dp"
-            android:hint="Type here"
-            android:textSize="14dp"
-            android:id="@+id/txt"
             android:background="@drawable/custom_edittext"
-            />
+            android:hint="Type here"
+            android:paddingStart="15dp"
+            android:textSize="14dp" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
