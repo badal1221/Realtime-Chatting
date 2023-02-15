@@ -38,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
+        prgbr=findViewById(R.id.prgbr);
         recview=findViewById(R.id.recview);
         img1=findViewById(R.id.img1);
-        prgbr=findViewById(R.id.prgbr);
         recview.setLayoutManager(new LinearLayoutManager(this));
         adapter=new Recyclercontactadapter(MainActivity.this,arr);
         recview.setAdapter(adapter);
-        prgbr.setVisibility(View.VISIBLE);
         name=getIntent().getStringExtra("Name");
         email=getIntent().getStringExtra("Email");
         mobno=getIntent().getStringExtra("Mobno");
@@ -63,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                 prgbr.setVisibility(View.VISIBLE);
                  arr.clear();
                  for(DataSnapshot dataSnapshot:snapshot.child("users").getChildren()){
                      final String getmobile=dataSnapshot.getKey();
@@ -105,14 +105,14 @@ public class MainActivity extends AppCompatActivity {
                              MessageList mesglist=new MessageList(getname,getmobile,last_msg,getprofile_pic,unseen,chatkey);
                              arr.add(mesglist);
                              adapter.updateData(arr);
+
                          }
                      }
                  }
+                 prgbr.setVisibility(View.GONE);
             }
             @Override
-            public void onCancelled(DatabaseError error) {
-            }
+            public void onCancelled(DatabaseError error) { }
         });
-        prgbr.setVisibility(View.GONE);
     }
 }
