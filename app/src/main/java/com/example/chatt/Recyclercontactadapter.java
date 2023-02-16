@@ -1,13 +1,18 @@
 package com.example.chatt;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatt.chat.Chat;
@@ -65,6 +70,24 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
                 intent.putExtra("Mobile",list.getMobile());
   //              Log.d("arr",String.valueOf(list.getChatkey().isEmpty()));
                 context.startActivity(intent);
+            }
+        });
+        Dialog dialog = new Dialog(context);
+        holder.imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.setContentView(R.layout.custom_dp);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                ImageView img= dialog.findViewById(R.id.img);
+                TextView name=dialog.findViewById(R.id.name);
+//                if(!arr.get(position).profilepic.equals("")) {
+//                    Picasso.get().load(list.profilepic).into(img);
+//                }
+//                else{img.setImageResource(R.drawable.tst); }
+ //               name.setText(list.getName());
+                img.setImageResource(R.drawable.tst);
+                dialog.show();
+
             }
         });
     }
