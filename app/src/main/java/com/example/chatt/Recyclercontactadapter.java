@@ -57,7 +57,8 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
         }
         holder.unmsgno.setText(String.valueOf(list.getUnseenmsg()));
         if(list.getUnseenmsg()==0){
-            holder.unmsgno.setVisibility(View.GONE); }
+            holder.unmsgno.setVisibility(View.GONE);
+        }
         else{
             holder.unmsgno.setVisibility(View.VISIBLE);
         }

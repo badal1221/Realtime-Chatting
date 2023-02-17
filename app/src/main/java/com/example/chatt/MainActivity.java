@@ -22,96 +22,108 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<MessageList> arr=new ArrayList<>();
-    String name,email,mobno;
+    private static String chatkey = "";
+    ArrayList<MessageList> arr = new ArrayList<>();
+    String name, email, mobno;
     RecyclerView recview;
     CircleImageView img1;
-    int unseen=0;
-    private String last_msg="";
-    private String chatkey="";
-    private boolean dataset=false;
-    private  Recyclercontactadapter adapter;
+    static int unseen = 0;
+    private String last_msg = "";
+    private boolean dataset = false;
+    private Recyclercontactadapter adapter;
     ProgressBar prgbr;
-    DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReferenceFromUrl("https://chatapplication-73bf2-default-rtdb.firebaseio.com/");
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://chatapplication-73bf2-default-rtdb.firebaseio.com/");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
-        prgbr=findViewById(R.id.prgbr);
-        recview=findViewById(R.id.recview);
-        img1=findViewById(R.id.img1);
+        prgbr = findViewById(R.id.prgbr);
+        recview = findViewById(R.id.recview);
+        img1 = findViewById(R.id.img1);
         recview.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new Recyclercontactadapter(MainActivity.this,arr);
+        adapter = new Recyclercontactadapter(MainActivity.this, arr);
         recview.setAdapter(adapter);
-        name=getIntent().getStringExtra("Name");
-        email=getIntent().getStringExtra("Email");
-        mobno=getIntent().getStringExtra("Mobno");
+        name = getIntent().getStringExtra("Name");
+        email = getIntent().getStringExtra("Email");
+        mobno = getIntent().getStringExtra("Mobno");
         //user's profile_pic set
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                  final String ppurl=snapshot.child("users").child(mobno).child("profile_pic").getValue(String.class);
-                  if(!ppurl.equals(" ")) { Picasso.get().load(ppurl).into(img1); }
-                  else{ img1.setImageResource(R.drawable.tst); }
+                final String ppurl = snapshot.child("users").child(mobno).child("profile_pic").getValue(String.class);
+                if (!ppurl.equals(" ")) {
+                    Picasso.get().load(ppurl).into(img1);
+                } else {
+                    img1.setImageResource(R.drawable.tst);
+                }
             }
+
             @Override
-            public void onCancelled(DatabaseError error) { }
+            public void onCancelled(DatabaseError error) {
+            }
         });
         //recview set
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                 prgbr.setVisibility(View.VISIBLE);
-                 arr.clear();
-                 for(DataSnapshot dataSnapshot:snapshot.child("users").getChildren()){
-                     final String getmobile=dataSnapshot.getKey();
-                     dataset=false;
-                     if(!getmobile.equals(mobno)){
-                         final String getname=dataSnapshot.child("name").getValue(String.class);
-                         final String getprofile_pic=dataSnapshot.child("profile_pic").getValue(String.class);
-                         databaseReference.child("chat").addListenerForSingleValueEvent(new ValueEventListener() {
-                             @Override
-                             public void onDataChange(DataSnapshot snapshot1) {
-                                 for(DataSnapshot ds:snapshot1.getChildren()){
-                                     if(ds.hasChild("user_1") && ds.hasChild("user_2")){
-                                         final String getuserone=ds.child("user_1").getValue(String.class);
-                                         final String getusertwo=ds.child("user_2").getValue(String.class);
-                                         if((getuserone.equals(getmobile) && getusertwo.equals(mobno)) ||(getusertwo.equals(getmobile) && getuserone.equals(mobno))){
-                                             //final String getkey=ds.getKey();
-                                             chatkey=ds.getKey();
-                                             for(DataSnapshot dataSnapshot1:ds.child("messages").getChildren()){
-                                                 //msg key of msg we are now iterating
-                                                 final long msgkey=Long.parseLong(dataSnapshot1.getKey());
-                                                 //getting the key of last seen message from memory
-                                                 final long lastseenmsg=Long.parseLong(MemoryData.getlastmsgTs(MainActivity.this,chatkey));
-                                                 last_msg=dataSnapshot1.child("msg").getValue(String.class);
-                                                 if(msgkey > lastseenmsg){
-                                                     unseen++;
-                                                 }
-                                             }
-                                         }
-                                     }
-                                 }
-                             }
-                             @Override
-                             public void onCancelled(DatabaseError error) { }
-                         });
-                         Log.d("arr",String.valueOf(chatkey.isEmpty()));
-                         if(!dataset){
-                             dataset=true;
- //                            Log.d("arr",String.valueOf(chatkey.isEmpty()));
-                             MessageList mesglist=new MessageList(getname,getmobile,last_msg,getprofile_pic,unseen,chatkey);
-                             arr.add(mesglist);
-                             adapter.updateData(arr);
+                prgbr.setVisibility(View.VISIBLE);
+                arr.clear();
+                for (DataSnapshot dataSnapshot : snapshot.child("users").getChildren()) {
+                    final String getmobile = dataSnapshot.getKey();
+                    dataset = false;
+                    if (!getmobile.equals(mobno)) {
+                        final String getname = dataSnapshot.child("name").getValue(String.class);
+                        final String getprofile_pic = dataSnapshot.child("profile_pic").getValue(String.class);
+                        databaseReference.child("chat").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot1) {
+                                for (DataSnapshot ds : snapshot1.getChildren()) {
+                                    if (ds.hasChild("user_1") && ds.hasChild("user_2")) {
+                                        final String getuserone = ds.child("user_1").getValue(String.class);
+                                        final String getusertwo = ds.child("user_2").getValue(String.class);
+                                        if ((getuserone.equals(getmobile) && getusertwo.equals(mobno)) || (getusertwo.equals(getmobile) && getuserone.equals(mobno))) {
+                                            //final String getkey=ds.getKey();
+                                            MainActivity.chatkey = ds.getKey();
+                                            //                                            Log.d("arr",String.valueOf(MainActivity.chatkey.isEmpty()));
+                                            for (DataSnapshot dataSnapshot1 : ds.child("messages").getChildren()) {
+                                                //msg key of msg we are now iterating
+                                                final long msgkey = Long.parseLong(dataSnapshot1.getKey());
+                                                //getting the key of last seen message from memory
+                                                final long lastseenmsg = Long.parseLong(MemoryData.getlastmsgTs(MainActivity.this, chatkey));
+                                                last_msg = dataSnapshot1.child("msg").getValue(String.class);
+                                                if (msgkey > lastseenmsg) {
+                                                    unseen++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
 
-                         }
-                     }
-                 }
-                 prgbr.setVisibility(View.GONE);
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                            }
+                        });
+                        //                      Log.d("arr",String.valueOf(chatkey.isEmpty()));
+                        if (!dataset) {
+                            dataset = true;
+                            //                           Log.d("arr",String.valueOf(chatkey.isEmpty()));
+                            //                            Log.d("arr",String.valueOf(unseen));
+                            MessageList mesglist = new MessageList(getname, getmobile, last_msg, getprofile_pic, unseen, chatkey);
+                            arr.add(mesglist);
+                            adapter.updateData(arr);
+                        }
+                    }
+                }
+                prgbr.setVisibility(View.GONE);
             }
+
             @Override
-            public void onCancelled(DatabaseError error) { }
+            public void onCancelled(DatabaseError error) {
+            }
         });
     }
+
 }
