@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.*;
 public class Register extends AppCompatActivity {
 
     @Override
@@ -45,8 +48,11 @@ public class Register extends AppCompatActivity {
                 if(name.isEmpty()||mobno.isEmpty()||email.isEmpty()){
                     Toast.makeText(Register.this, "All fields are required", Toast.LENGTH_SHORT).show();
                 }
-                else if(!isNumeric(mobno)){
+                else if(!isNumeric(mobno) || mobno.length()!=10){
                     Toast.makeText(Register.this,"Enter a valid mobile number",Toast.LENGTH_SHORT).show();
+                }
+                else if(!isValid(email)){
+                    Toast.makeText(Register.this,"Enter a valid email id",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -90,5 +96,16 @@ public class Register extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    public static boolean isValid(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 }
