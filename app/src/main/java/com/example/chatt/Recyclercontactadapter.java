@@ -70,7 +70,6 @@ public class Recyclercontactadapter extends RecyclerView.Adapter<Recyclercontact
                 intent.putExtra("profile_pic",list.getProfilepic());
                 intent.putExtra("chat_key",list.getChatkey());
                 intent.putExtra("Mobile",list.getMobile());
-  //              Log.d("arr",String.valueOf(list.getChatkey().isEmpty()));
                 context.startActivity(intent);
             }
         });

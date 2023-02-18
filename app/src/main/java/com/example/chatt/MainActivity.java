@@ -84,9 +84,10 @@ public class MainActivity extends AppCompatActivity {
                                         final String getuserone = ds.child("user_1").getValue(String.class);
                                         final String getusertwo = ds.child("user_2").getValue(String.class);
                                         if ((getuserone.equals(getmobile) && getusertwo.equals(mobno)) || (getusertwo.equals(getmobile) && getuserone.equals(mobno))) {
-                                            //final String getkey=ds.getKey();
-                                            MainActivity.chatkey = ds.getKey();
-                                            //                                            Log.d("arr",String.valueOf(MainActivity.chatkey.isEmpty()));
+                                            chatkey = ds.getKey();
+
+                                            //MemoryData.savechatkey(chatkey,MainActivity.this,getname);
+
                                             for (DataSnapshot dataSnapshot1 : ds.child("messages").getChildren()) {
                                                 //msg key of msg we are now iterating
                                                 final long msgkey = Long.parseLong(dataSnapshot1.getKey());
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                                                     unseen++;
                                                 }
                                             }
+//                                            MemoryData.saveunseenno(String.valueOf(unseen),MainActivity.this,getname+"1");
+//                                            MemoryData.savelastmsg(last_msg,MainActivity.this,getname+"2");
                                         }
                                     }
                                 }
@@ -106,12 +109,10 @@ public class MainActivity extends AppCompatActivity {
                             public void onCancelled(DatabaseError error) {
                             }
                         });
-                        //                      Log.d("arr",String.valueOf(chatkey.isEmpty()));
                         if (!dataset) {
                             dataset = true;
-                            //                           Log.d("arr",String.valueOf(chatkey.isEmpty()));
-                            //                            Log.d("arr",String.valueOf(unseen));
-                            MessageList mesglist = new MessageList(getname, getmobile, last_msg, getprofile_pic, unseen, chatkey);
+//                           Log.d("arr",String.valueOf(MemoryData.getchatkey(MainActivity.this).isEmpty()));
+                            MessageList mesglist = new MessageList(getname, getmobile, last_msg, getprofile_pic, unseen,chatkey);
                             arr.add(mesglist);
                             adapter.updateData(arr);
                         }

@@ -88,4 +88,83 @@ public class MemoryData {
         }
         return data;
     }
+    //saving every user's chatkey according to their name
+//    public static void savechatkey(String data, Context context,String name1){
+//        try{
+//            FileOutputStream fileOutputStream=context.openFileOutput(name1+".txt",context.MODE_PRIVATE);
+//            fileOutputStream.write(data.getBytes());
+//            fileOutputStream.close();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+//    public  static  String getchatkey(Context context,String name1){
+//        String data="";
+//        try{
+//            FileInputStream fis=context.openFileInput(name1+".txt");
+//            InputStreamReader isr=new InputStreamReader(fis);
+//            BufferedReader bufferedReader=new BufferedReader(isr);
+//            StringBuilder sb=new StringBuilder();
+//            String line;
+//            while((line=bufferedReader.readLine())!=null){
+//                sb.append(line);
+//            }
+//            data=sb.toString();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }
+//    public static void saveunseenno(String data, Context context,String name1){
+//        try{
+//            FileOutputStream fileOutputStream=context.openFileOutput(name1+".txt",context.MODE_PRIVATE);
+//            fileOutputStream.write(data.getBytes());
+//            fileOutputStream.close();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+//    public  static  String getunseenno(Context context,String name1){
+//        String data="";
+//        try{
+//            FileInputStream fis=context.openFileInput(name1+".txt");
+//            InputStreamReader isr=new InputStreamReader(fis);
+//            BufferedReader bufferedReader=new BufferedReader(isr);
+//            StringBuilder sb=new StringBuilder();
+//            String line;
+//            while((line=bufferedReader.readLine())!=null){
+//                sb.append(line);
+//            }
+//            data=sb.toString();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }
+//    public static void savelastmsg(String data, Context context,String name1){
+//        try{
+//            FileOutputStream fileOutputStream=context.openFileOutput(name1+".txt",context.MODE_PRIVATE);
+//            fileOutputStream.write(data.getBytes());
+//            fileOutputStream.close();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//    }
+//    public  static  String getlastmsg(Context context,String name1){
+//        String data="";
+//        try{
+//            FileInputStream fis=context.openFileInput(name1+".txt");
+//            InputStreamReader isr=new InputStreamReader(fis);
+//            BufferedReader bufferedReader=new BufferedReader(isr);
+//            StringBuilder sb=new StringBuilder();
+//            String line;
+//            while((line=bufferedReader.readLine())!=null){
+//                sb.append(line);
+//            }
+//            data=sb.toString();
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }
 }
