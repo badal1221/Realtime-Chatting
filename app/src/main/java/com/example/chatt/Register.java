@@ -83,7 +83,7 @@ public class Register extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(DatabaseError error) {
-
+                            Toast.makeText(Register.this, error.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

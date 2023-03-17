@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                                             chatkey = ds.getKey();
 
                                             MemoryData.savechatkey(chatkey,MainActivity.this,getname);
+//                                            SharedPreferences pref= getSharedPreferences("Goal", Context.MODE_PRIVATE);
+//                                            SharedPreferences.Editor editor=pref.edit();
+//                                            editor.putString("key1",chatkey);
+//                                            editor.apply();
 
                                             for (DataSnapshot dataSnapshot1 : ds.child("messages").getChildren()) {
                                                 //msg key of msg we are now iterating
@@ -98,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
                                                     unseen++;
                                                 }
                                             }
-                                            MemoryData.saveunseenno(String.valueOf(unseen),MainActivity.this,getname+"a");
-                                            MemoryData.savelastmsg(last_msg,MainActivity.this,getname+"b");
+                                            //MemoryData.saveunseenno(String.valueOf(unseen),MainActivity.this,getname+"a");
+                                           // MemoryData.savelastmsg(last_msg,MainActivity.this,getname+"b");
                                         }
                                     }
                                 }
@@ -112,9 +118,11 @@ public class MainActivity extends AppCompatActivity {
                         if (!dataset) {
                             dataset = true;
                             String ck=MemoryData.getchatkey(MainActivity.this,getname);
-                            Log.d("arr",ck);
 //                            int us=Integer.parseInt(MemoryData.getunseenno(MainActivity.this,getname+"a"));
 //                            String last=MemoryData.getlastmsg(MainActivity.this,getname+"b");
+//                            SharedPreferences pref= getSharedPreferences("Goal",Context.MODE_PRIVATE);
+//                            String chatk=pref.getString("key1","");
+                            Log.d("arr",ck);
                             MessageList mesglist = new MessageList(getname, getmobile, last_msg, getprofile_pic, unseen,ck);
                             arr.add(mesglist);
                             adapter.updateData(arr);
